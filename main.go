@@ -55,8 +55,8 @@ func main() {
 	// Define flags
 	add := flag.String("add", "", "Add a new task")
 	list := flag.Bool("list", false, "List all tasks")
-	complete := flag.Int("complete", 0, "Complete a task by its ID")
-	delete := flag.Int("delete", 0, "Delete a task by its ID")
+	complete := flag.Int("complete", 0, "Mark a task complete by its ID")
+	remove := flag.Int("delete", 0, "Delete a task by its ID")
 	flag.Parse()
 
 	if *add != "" {
@@ -78,7 +78,7 @@ func main() {
 			}
 			fmt.Printf("%d: %s (%s)\n", task.ID, task.Description, status)
 		}
-	} else if *complete >= 0 {
+	} else if *complete > 0 {
 		// Mark a task as completed
 		for i, task := range taskList.Tasks {
 			if task.ID == *complete {
@@ -89,14 +89,14 @@ func main() {
 			}
 		}
 		fmt.Println("Task not found")
-	} else if *delete >= 0 {
+	} else if *remove > 0 {
 
 		// Delete a task
 		newTasks := []Task{}
 
 		for _, task := range taskList.Tasks {
 			i := 1
-			if task.ID != *delete {
+			if task.ID != *remove {
 				task.ID = i
 				newTasks = append(newTasks, task)
 				i += 1
