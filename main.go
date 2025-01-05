@@ -56,7 +56,7 @@ func main() {
 	add := flag.String("add", "", "Add a new task")
 	list := flag.Bool("list", false, "List all tasks")
 	complete := flag.Int("complete", 0, "Mark a task complete by its ID")
-	remove := flag.Int("delete", 0, "Delete a task by its ID")
+	remove := flag.Int("remove", 0, "Remove a task by its ID")
 	flag.Parse()
 
 	if *add != "" {
@@ -91,7 +91,7 @@ func main() {
 		fmt.Println("Task not found")
 	} else if *remove > 0 {
 
-		// Delete a task
+		// Remove a task
 		newTasks := []Task{}
 
 		for _, task := range taskList.Tasks {
@@ -108,7 +108,7 @@ func main() {
 		} else {
 			taskList.Tasks = newTasks
 			SaveTasks(taskList)
-			fmt.Println("Task deleted")
+			fmt.Println("Task removed")
 		}
 	} else {
 		fmt.Println("Usage: ")
